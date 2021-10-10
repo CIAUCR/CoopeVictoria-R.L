@@ -251,10 +251,6 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 // Ubicacion del control de capas
 control_layers = L.control.layers(baseMaps, overlayMaps, {position:'topright', "autoZIndex": true, collapsed:true}).addTo(map);	
 
-
-
-
-
  
 
 
