@@ -108,7 +108,7 @@ $.getJSON("ndvi.geojson", function(geodata) {
 
 // Leyenda del NDVI
 
-var legend = L.control({position: 'bottom'});
+var legend = L.control({position: 'bottomleft'});
 legend.title = "Rangos del NDVI"
 legend.onAdd = function (map) {
 	var div = L.DomUtil.create('div', 'info legend'),
