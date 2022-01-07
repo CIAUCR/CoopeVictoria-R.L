@@ -84,45 +84,45 @@ function getColor(d) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // LLamado y estilo de capa para el mapa de rendimiento
-$.getJSON("ndvi.geojson", function(geodata) {
-	var layer_geojson_ndvi = L.geoJson(geodata, {
-		style: function(feature) {
-			return {
-				fillColor: getColor(feature.properties.NDVI),
-				weight: 0.1,
-				opacity: 1,
-				color: '#7f8c8d',
-				fillOpacity: 0.8
-				}
-		},
-		onEachFeature: function(feature, layer) {
-			var popupText = "Valor de NDVI: " + feature.properties.NDVI + "<br>";
-			layer.bindPopup(popupText);
-		}			
-	}).addTo(map);
-	control_layers.addOverlay(layer_geojson_ndvi, 'NDVI Calculado con el Sensor Sentinel 2');
+//$.getJSON("ndvi.geojson", function(geodata) {
+	//var layer_geojson_ndvi = L.geoJson(geodata, {
+		//style: function(feature) {
+			//return {
+				//fillColor: getColor(feature.properties.NDVI),
+				//weight: 0.1,
+				//opacity: 1,
+// 				color: '#7f8c8d',
+// 				fillOpacity: 0.8
+// 				}
+// 		},
+// 		onEachFeature: function(feature, layer) {
+// 			var popupText = "Valor de NDVI: " + feature.properties.NDVI + "<br>";
+// 			layer.bindPopup(popupText);
+// 		}			
+// 	}).addTo(map);
+// 	control_layers.addOverlay(layer_geojson_ndvi, 'NDVI Calculado con el Sensor Sentinel 2');
 	
-});
+// });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Leyenda del NDVI
 
-var legend = L.control({position: 'bottomleft'});
-legend.title = "Rangos del NDVI"
-legend.onAdd = function (map) {
-	var div = L.DomUtil.create('div', 'info legend'),
-		grades = [20, 30, 40, 50, 60, 70, 80, 90],
-         labels = ['Categories'],
-        from, to;
-	for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    }
-    return div;
-};
-legend.addTo(map);
+// var legend = L.control({position: 'bottomleft'});
+// legend.title = "Rangos del NDVI"
+// legend.onAdd = function (map) {
+// 	var div = L.DomUtil.create('div', 'info legend'),
+// 		grades = [20, 30, 40, 50, 60, 70, 80, 90],
+//          labels = ['Categories'],
+//         from, to;
+// 	for (var i = 0; i < grades.length; i++) {
+//         div.innerHTML +=
+//             '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+//             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+//     }
+//     return div;
+// };
+// legend.addTo(map);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -230,7 +230,7 @@ $.getJSON("distritos_influencia.geojson", function(geodata) {
 $.getJSON("rendimientohistorico.geojson", function(geodata) {
 	var layer_geojson_historial = L.geoJson(geodata, {
 		style: function(feature) {
-			return {'color': "black", 'weight': 1, 'fillOpacity': 0.0}
+			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
 		},
 		onEachFeature: function(feature, layer) {
 			var popupText = "Finca: " + feature.properties.FINCA + "<br>" + "Zafra 2016-2017: " + feature.properties.PROD_16 +  " Ton/ha" + "<br>" + 
