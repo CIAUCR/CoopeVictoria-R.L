@@ -213,7 +213,7 @@ function estiloSelect() {
 $.getJSON("distritos_influencia.geojson", function(geodata) {
 	var layer_geojson_distritos_influencia = L.geoJson(geodata, {
 		style: function(feature) {
-			return {'color': "#000000", 'weight': 1, 'fillOpacity': 0.0}
+			return {'color': "blue", 'weight': 1, 'fillOpacity': 0.0}
 		},
 		onEachFeature: function(feature, layer) {
 			var popupText = "Provincia: " + feature.properties.provincia + "<br>" + "Cantón: " + feature.properties.canton +
