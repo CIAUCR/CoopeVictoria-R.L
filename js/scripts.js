@@ -52,7 +52,7 @@ var overlayMaps = {
 $.getJSON("lotes_coopevictoriarl.geojson", function(geodata) {
 	var layer_geojson_lotes_coopevictoriarl = L.geoJson(geodata, {
 		style: function(feature) {
-			return {'color': "black", 'weight': 1, 'fillOpacity': 0.0}
+			return {'color': "red", 'weight': 1, 'fillOpacity': 0.0}
 		},
 		onEachFeature: function(feature, layer) {
 			var popupText = "Finca: " + feature.properties.FINCA + "<br>" + "Lote: " + feature.properties.LOTE +
