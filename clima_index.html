@@ -45,26 +45,56 @@ h1 {
 </div>
 
 <h1>Sistema de Monitoreo climatico </h1>
-
-	<iframe width="100%" height="300" style="border:1px solid black;">
+<div>
 
 <head>
   <meta charset="utf-8" />
   <title>Open-Meteoのサンプル</title>
 </head>
 <body>
-  <h1>Open-Meteoのサンプル</h1>
+  <h1>Datos climáticos de temperatura</h1> 
+
+Current Date:
+<input type="text" id="currentDate">
+<br><br>
+<script>
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  document.getElementById("currentDate").value = date;
+</script>
+<!-- Current Time -->
+Current Time:
+<input type="text" id="currentTime">
+<br><br>
+<script>
+var today = new Date();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  document.getElementById("currentTime").value = time;
+</script>
+<!-- Current Date and Time -->
+Get Current Date and Time Both:
+<input type="text" id="currentDateTime">
+<br><br>
+<script>
+  var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time;
+  document.getElementById("currentDateTime").value = dateTime;
+</script>
+
+</script>
   <canvas id="stage"></canvas>
   
   <hr/>
   
-  <!-- 「Open-Meteo」の帰属表示 -->
+
   <small><a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a></small>
   
   
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
   <script>
-    // 最高気温と最低気温を取得する
+
     const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo';
 
     fetch(url)
@@ -76,11 +106,11 @@ h1 {
       const mydata = {
         labels: json.daily.time,
         datasets: [{
-          label: '最高気温',
+          label: 'Temperatura Max',
           data: json.daily.temperature_2m_max,
           borderColor: 'rgb(192, 75, 75)',
         },{
-          label: '最低気温',
+          label: 'Temperatura Min',
           data: json.daily.temperature_2m_min,
           borderColor: 'rgb(75, 75, 192)',
         }]
@@ -93,31 +123,10 @@ h1 {
     }
 
   </script>
-</iframe>	
+
+</div>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	
 </div>
 
