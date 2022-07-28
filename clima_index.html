@@ -53,7 +53,90 @@ h1 {
     height="200"
     src="https://api.open-meteo.com/v1/ecmwf?latitude=9.93&longitude=-84.05&hourly=temperature_2m,windspeed_10m,winddirection_10m">
 </iframe>
+	
+	<iframe
+function llamarClima1(lat,lon){
 
+                //url = 'https://api.open-meteo.com/v1/ecmwf?latitude=9.93&longitude=-84.05&hourly=temperature_2m,windspeed_10m,winddirection_10m';
+
+                url = 'https://api.open-meteo.com/v1/ecmwf?latitude=9.93&longitude=-84.05&hourly=temperature_2m,relativehumidity_2m,precipitation,weathercode,cloudcover,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=America%2FSantiago&';
+
+
+                $.ajax({
+                  type: "GET",
+                  url: url, //
+                  beforeSend: function() {
+
+                    },
+                    success: function (result) {
+
+                        datos =result;
+                     //   console.log(datos);
+                     //   console.log("current_weather",datos["current_weather"]);
+                     //   console.log("daily",datos["daily"]);
+                     //   console.log("hourly",datos["hourly"]);
+
+
+                       /*borrar datos*/
+
+                       for(i=50;i<datos["hourly"].time.length;i++){
+                            delete datos["hourly"].cloudcover[i];
+                            delete datos["hourly"].precipitation[i];
+                            delete datos["hourly"].relativehumidity_2m[i];
+                            delete datos["hourly"].temperature_2m[i];
+                            delete datos["hourly"].time[i];
+                            delete datos["hourly"].weathercode[i];
+                            delete datos["hourly"].windspeed_10m[i];
+
+                       }
+
+
+
+
+                        actual = datos["current_weather"];
+                        daily = datos["daily"];
+                        hourly = datos["hourly"];
+
+
+
+
+
+                        guardarClima1(actual,daily,hourly,lat,lon)
+
+
+                    }, error : function(xhr, status) {
+
+                    }
+                });
+            }	
+	
+</iframe>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </div>
 
 </div>
