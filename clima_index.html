@@ -47,319 +47,41 @@ h1 {
 <h1>Sistema de Monitoreo climatico </h1>
 
 <div>
-
-function llamarClima1(lat,lon){
-
-                //url = 'https://api.open-meteo.com/v1/ecmwf?latitude=9.93&longitude=-84.05&hourly=temperature_2m,windspeed_10m,winddirection_10m';
-
-                url = 'https://api.open-meteo.com/v1/ecmwf?latitude=9.93&longitude=-84.05&hourly=temperature_2m,relativehumidity_2m,precipitation,weathercode,cloudcover,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=America%2FSantiago&';
-
-
-                $.ajax({
-                  type: "GET",
-                  url: url, //
-                  beforeSend: function() {
-
-                    },
-                    success: function (result) {
-
-                        datos =result;
-                     //   console.log(datos);
-                     //   console.log("current_weather",datos["current_weather"]);
-                     //   console.log("daily",datos["daily"]);
-                     //   console.log("hourly",datos["hourly"]);
-
-
-                       /*borrar datos*/
-
-                       for(i=50;i<datos["hourly"].time.length;i++){
-                            delete datos["hourly"].cloudcover[i];
-                            delete datos["hourly"].precipitation[i];
-                            delete datos["hourly"].relativehumidity_2m[i];
-                            delete datos["hourly"].temperature_2m[i];
-                            delete datos["hourly"].time[i];
-                            delete datos["hourly"].weathercode[i];
-                            delete datos["hourly"].windspeed_10m[i];
-
-                       }
-
-
-
-
-                        actual = datos["current_weather"];
-                        daily = datos["daily"];
-                        hourly = datos["hourly"];
-
-
-
-
-
-                        guardarClima1(actual,daily,hourly,lat,lon)
-
-
-                    }, error : function(xhr, status) {
-
-                    }
-                });
-            }	
-function graficarClima1(datos){
-
-              //  console.log(".............................................................");
-              //  console.log(".............................................................");
-
-                console.log(datos);
-                current = JSON.parse(datos.data1);
-                daily = JSON.parse(datos.data2);
-                hourly = JSON.parse(datos.data3);
-
-              //  console.log("current",current);
-              //  console.log("daily",daily);
-              //  console.log("hourly",hourly);
-
-
-                const month = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
-                const days = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
-                const descripcion = {
-                    "0":"Cielo limpio",
-                    "1":"Principalmente despejado",
-                    "2":"parcialmente nublado",
-                    "3":"Nublado",
-                    "45":"Niebla",
-                    "48":"Niebla de escarcha depositada",
-                    "51":"Llovizna ligera",
-                    "53":"Llovizna moderada",
-                    "55":"Llovizna densa",
-                    "56":"Llovizna Engelante ligera",
-                    "57":"Llovizna Engelante densa",
-                    "61":"Lluvia leve",
-                    "63":"Lluvia moderada",
-                    "65":"Lluvia fuerte",
-                    "66":"Lluvia helada ligera",
-                    "67":"Lluvia helada fuerte",
-                    "71":"Nieve ligera",
-                    "73":"Nieve moderada",
-                    "75":"Nieve fuerte",
-                    "77":"Granizoa de nieve",
-                    "80":"Lluvias leve",
-                    "81":"Lluvias moderada",
-                    "82":"Lluvias fuerte",
-                    "85":"Chubascos nieve leves",
-                    "86":"Chubascos nieve fuertes",
-                    "95":"Tormenta ligera o moderada",
-                    "96":"Tormenta con granizo leve",
-                    "99":"Tormenta con granizo fuerte",
-                };
-
-
-                const imagenes = {
-                    "0":"c01d",
-                    "1":"c01d",
-                    "2":"c02d",
-                    "3":"c04d",
-                    "45":"c03d",
-                    "48":"c03d",
-                    "51":"d01d",
-                    "53":"f01d",
-                    "55":"f01d",
-                    "56":"r03d",
-                    "57":"r03d",
-                    "61":"d03n",
-                    "63":"d03n",
-                    "65":"f01d",
-                    "66":"f01d",
-                    "67":"f01d",
-                    "71":"s06d",
-                    "73":"s06d",
-                    "75":"s03n",
-                    "77":"s06d",
-                    "80":"d02n",
-                    "81":"d02n",
-                    "82":"f01d",
-                    "85":"s06d",
-                    "86":"s02d",
-                    "95":"t04d",
-                    "96":"t04d",
-                    "99":"t04d",
-                };
-
-
-
-                /*----------------------------------------actual-------------------------------------------*/
-
-                datetime = current.time;
-
-
-                myDate = new Date(datetime);
-                const d = new Date(myDate.getUTCFullYear(), myDate.getUTCMonth(), myDate.getUTCDate());
-                mes = month[d.getUTCMonth()];
-                dia= d.getDate();
-                year = d.getFullYear();
-                fecha = mes+". "+dia+", "+year;
-
-                $('#clima_fecha_actual').html(fecha);
-                $('#clima_descripcion_actual').html(descripcion[current.weathercode]);
-                $('#clima_celcius_actual').html(current.temperature +"°C");
-
-                $('#clima_img_actual').html('<img height="50" width="50" alt="Weather API Day few clouds" style="" src="'+"http://openfruit.cl/assets/iconos"+'/'+imagenes[current.weathercode]+'.png">');
-
-
-                $('#clima_viento_actual').html(current.windspeed+" m/s");
-
-
-
-
-                /*---------------------------------------------------------------------------------------*/
-
-
-                for(i=0;i<daily.time.length;i++){
-
-                    if(i==0){
-
-                        $('#clima_precipitacion_actual').html(daily.precipitation_sum[i]+" mm");
-
-                        //$('#clima_humedad_actual').html(daily[i].rh+"%");
-                        //$('#clima_nube_actual').html(daily[i].clouds+" %");
-
-                    }
-
-                    datetime = daily.time[i];
-                    myDate = new Date(datetime);
-                    const d = new Date(myDate.getUTCFullYear(), myDate.getUTCMonth(), myDate.getUTCDate());
-                    mes = month[d.getUTCMonth()];
-                    dia= d.getDate();
-                    year = d.getFullYear();
-                    fecha = mes+" "+dia;
-
-                    $('#clima_fecha_'+i).html(fecha);
-                    $('#clima_img_'+i).html('<img height="20" width="20" alt="Weather API Day few clouds" style="" src="'+"http://openfruit.cl/assets/iconos"+'/'+imagenes[daily.weathercode[i]]+'.png">');
-
-                    $('#clima_minima_'+i).html(daily.temperature_2m_min[i]+"°");
-                    $('#clima_max_'+i).html(daily.temperature_2m_max[i]+"°");
-
-                    if(daily.precipitation_sum[i]>0){
-
-                        $('#clima_lluvia_'+i).show();
-                        /*
-
-                                //$('#clima_prob_preci_'+i).html(daily[i].pop+"%");
-
-
-                        */
-                        $('#clima_prob_preci_'+i).html("");
-                        $('#clima_precipitacion_'+i).html(daily.precipitation_sum[i]+" mm");
-
-                    }
-
-
-
-                }
-
-                codigo_hora='';
-
-                i=0;
-                hora_encontrada=0;
-
-                var d2 = new Date();
-                let hour = d2.getHours();
-                let day_ = days[d2.getDay()];
-                $('#dia_hora').html();
-
-
-                if(hour<10){
-                    hour="0"+hour;
-                }
-
-                hour=hour+":00";
-
-                while(hora_encontrada<24)
-                {
-
-
-
-                    //hourly.time
-
-                    _hora= hourly.time[i];
-                    _hora=_hora.split("T");
-
-
-
-
-                    if(_hora[1]==hour){
-                        $('#clima_nube_actual').html(hourly.cloudcover[i]+" %");
-
-                        $('#clima_humedad_actual').html(hourly.relativehumidity_2m[i]+"%");
-
-                    }else{
-
-                    }
-
-
-
-
-                    if(_hora[1]>=hour || hora_encontrada>0){
-                        hora_encontrada++;
-
-                        if(hora_encontrada>1 && _hora[1]=="00:00"){
-                            //es otro dia..........
-                          //   console.log("es otro dia");
-                        }
-
-                       // console.log("hora_api"+_hora[1]+" - hora mia"+hour );
-
-                        codigo_hora= codigo_hora+'<div class="row elem0_2" style="padding:0px;">'+
-                          '<div class="col-4 elem1_2" style="padding:0px;">'+_hora[1]+
-                          '</div>'+
-                          '<div class="col-2" style="padding:0px;">'+
-                            '<img height="20" width="20" alt="Weather API Day few clouds" style="" src="'+"http://openfruit.cl/assets/iconos"+'/'+imagenes[hourly.weathercode[i]]+'.png">'+
-                          '</div>'+
-
-                          '<div class="col-2" style="padding:0px;">';
-
-                          if(hourly.precipitation[i]>0){
-                            codigo_hora = codigo_hora +'<div style="padding:0px; " class="elem3_2">'+
-                                '<div class="row" style="padding:0px;height: 10px;">'+
-                                    '<div class="col-12" style="padding:0px;;margin-top: -10px;height: 10px;">'+
-                                        '<span style="font-size: 0.8em;" class="elem4_2"></span>'+
-                                    '</div>'+
-                                '</div>'+
-                                '<div class="row" style="padding:0px;height: 10px;">'+
-                                    '<div class="col-12" style="padding:0px;margin-top: -10px;height: 10px;">'+
-                                        '<span style="font-size: 0.8em;" class="elem5_2">'+hourly.precipitation[i]+' mm</span>'+
-                                    '</div>'+
-                                '</div>'+
-                            '</div>';
-                          }else{
-                            codigo_hora = codigo_hora +'<div style="padding:0px; display: none;" class="elem3_2">'+
-                                '<div class="row" style="padding:0px;height: 10px;">'+
-                                    '<div class="col-12" style="padding:0px;;margin-top: -10px;height: 10px;">'+
-                                        '<span style="font-size: 0.8em;" class="elem4_2">aa</span>'+
-                                    '</div>'+
-                                '</div>'+
-                                '<div class="row" style="padding:0px;height: 10px;">'+
-                                    '<div class="col-12" style="padding:0px;margin-top: -10px;height: 10px;">'+
-                                        '<span style="font-size: 0.8em;" class="elem5_2">bb</span>'+
-                                    '</div>'+
-                                '</div>'+
-                            '</div>';
-                          }
-
-
-
-                          codigo_hora = codigo_hora +'</div>'+
-
-                          '<div class="col-2 elem6_2" style="padding:0px;" >'+hourly.temperature_2m[i]+'°'+
-                          '</div>'+
-                          '<div class="col-2 elem7_2" style="padding:0px;"  >'+hourly.windspeed_10m[i]+'ms'+
-                          '</div>'+
-                        '</div>';
-                    }
-
-
-                    i++;
-
-
-                }
-
+<hr/>
+  
+  <!-- 「Open-Meteo」の帰属表示 -->
+  <small><a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a></small>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+  <script>
+    // 最高気温と最低気温を取得する
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo';
+
+    fetch(url)
+    .then(data => data.json())
+    .then(json => drawChart(json))
+
+
+    function drawChart(json) {
+      const mydata = {
+        labels: json.daily.time,
+        datasets: [{
+          label: '最高気温',
+          data: json.daily.temperature_2m_max,
+          borderColor: 'rgb(192, 75, 75)',
+        },{
+          label: '最低気温',
+          data: json.daily.temperature_2m_min,
+          borderColor: 'rgb(75, 75, 192)',
+        }]
+      }
+
+      new Chart(document.getElementById('stage'), {
+        type: 'line',
+        data: mydata,
+      });
+    }
 	
 </div>
 	
