@@ -92,7 +92,7 @@ var dateTime = date+' '+time;
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.js"></script>
   <script>
 
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo';
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=9.94&longitude=-84.09&hourly=temperature_2m,rain';
 
     fetch(url)
     .then(data => data.json())
@@ -103,12 +103,12 @@ var dateTime = date+' '+time;
       const mydata = {
         labels: json.daily.time,
         datasets: [{
-          label: 'Temperatura Max',
-          data: json.daily.temperature_2m_max,
+          label: 'Temperatura (Cº)',
+          data: json.daily.temperature_2m,
           borderColor: 'rgb(192, 75, 75)',
         },{
-          label: 'Temperatura Min',
-          data: json.daily.temperature_2m_min,
+          label: 'Precipitación (mm)',
+          data: json.daily.rain,
           borderColor: 'rgb(75, 75, 192)',
         }]
       }
