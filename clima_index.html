@@ -92,7 +92,7 @@ var dateTime = date+' '+time;
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.js"></script>
   <script>
 
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=9.94&longitude=-84.09&hourly=temperature_2m,rain';
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=9.94&longitude=-84.09&daily=precipitation_sum,et0_fao_evapotranspiration&timezone=America%2FDenver';
 
     fetch(url)
     .then(data => data.json())
@@ -104,11 +104,11 @@ var dateTime = date+' '+time;
         labels: json.hourly.time,
         datasets: [{
           label: 'Temperatura (Cº)',
-          data: json.hourly.temperature_2m,
+          data: json.daily.precipitation_sum,
           borderColor: 'rgb(192, 75, 75)',
         },{
           label: 'Precipitación (mm)',
-          data: json.hourly.rain,
+          data: json.daily.et0_fao_evapotranspiration,
           borderColor: 'rgb(75, 75, 192)',
         }]
       }
