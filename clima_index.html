@@ -135,74 +135,19 @@ var dateTime = date+' '+time;
   <title>Open-Meteoのサンプル</title>
 </head>
 <body>
-  <h2>Datos climáticos de temperatura</h2> 
+  <h2>Datos estación IMN</h2> 
 </div>
 
 
 
-<!-- Current Date and Time -->
-Fecha y hora actual:
-<input type="text" id="currentDateTime">
-<br><br>
-<script>
-var today = new Date();
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-var dateTime = date+' '+time;
-  document.getElementById("currentDateTime").value = dateTime;
+<h1>The embed element</h1>
 
-
-</script>
-  <canvas id="stage"></canvas>
-  
-  <small><a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a></small>
-
-
-</script>
-  <canvas id="stage" width=2px height=2px></canvas>
-  
-  <hr/>
-  
-  
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.js"></script>
-  <script>
-
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo';
-
-    fetch(url)
-    .then(data => data.json())
-    .then(json => drawChart(json))
-
-
-    function drawChart(json) {
-      const mydata = {
-        labels: json.daily.time,
-        datasets: [{
-          label: 'Temperatura Max',
-          data: json.daily.temperature_2m_max,
-          borderColor: 'rgb(192, 75, 75)',
-        },{
-          label: 'Temperatura Min',
-          data: json.daily.temperature_2m_min,
-          borderColor: 'rgb(75, 75, 192)',
-        }]
-      }
-
-      new Chart(document.getElementById('stage'), {
-        type: 'line',
-        data: mydata,
-	fill: true,
-      });
-    }
-
+<embed type="text/html" src="https://www.imn.ac.cr/especial/tablas/argentina.html"  width="500" height="200">
 
   </script>
 </div>
 
-	<h1>The embed element</h1>
-
-<embed type="text/html" src="https://www.imn.ac.cr/especial/tablas/argentina.html"  width="500" height="200">
-
+	
 	
 </body>
 </html>
