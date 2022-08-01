@@ -103,11 +103,11 @@ var dateTime = date+' '+time;
       const mydata = {
         labels: json.hourly.time,
         datasets: [{
-          label: 'Temperatura (Cº)',
+          label: 'Precipitación (mm)',
           data: json.daily.precipitation_sum,
           borderColor: 'rgb(192, 75, 75)',
         },{
-          label: 'Precipitación (mm)',
+          label: 'ETo FAO (mm)',
           data: json.daily.et0_fao_evapotranspiration,
           borderColor: 'rgb(75, 75, 192)',
         }]
