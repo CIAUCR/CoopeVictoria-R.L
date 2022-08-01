@@ -101,14 +101,14 @@ var dateTime = date+' '+time;
 
     function drawChart(json) {
       const mydata = {
-        labels: json.daily.time,
+        labels: json.hourly.time,
         datasets: [{
           label: 'Temperatura (Cº)',
-          data: json.daily.temperature_2m,
+          data: json.hourly.temperature_2m,
           borderColor: 'rgb(192, 75, 75)',
         },{
           label: 'Precipitación (mm)',
-          data: json.daily.rain,
+          data: json.hourly.rain,
           borderColor: 'rgb(75, 75, 192)',
         }]
       }
