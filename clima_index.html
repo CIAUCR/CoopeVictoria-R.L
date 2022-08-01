@@ -44,8 +44,6 @@ h1 {
 	<a href="clima_index.html">Sección climática</a>
 </div>
 
-
-
 	  
 <h1>Sistema de Monitoreo climatico </h1>
 <div>
@@ -70,39 +68,15 @@ var dateTime = date+' '+time;
 
 
 </script>
-  <canvas id="stage"></canvas>
+  <canvas id="stage" width="50" height="50"></canvas>
   
   <small><a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a></small>
-  
-<h1>Sistema de Monitoreo climatico </h1>
-<div>
-
-<head>
-  <meta charset="utf-8" />
-  <title>Open-Meteoのサンプル</title>
-</head>
-<body>
-  <h1>Datos climáticos de temperatura</h1> 
-
-<!-- Current Date and Time -->
-Fecha y hora actual:
-<input type="text" id="currentDateTime">
-<br><br>
-<script>
-var today = new Date();
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-var dateTime = date+' '+time;
-  document.getElementById("currentDateTime").value = dateTime;
 
 
 </script>
-  <canvas id="stage"></canvas>
+  <canvas id="stage" ></canvas>
   
   <hr/>
-  
-
-  <small><a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a></small>
   
   
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
