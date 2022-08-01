@@ -133,59 +133,7 @@ var dateTime = date+' '+time;
 
 
 <div>
-<!-- Current Date and Time -->
-Fecha y hora actual:
-<input type="text" id="currentDateTime">
-<br><br>
-<script>
-var today = new Date();
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-var dateTime = date+' '+time;
-  document.getElementById("currentDateTime").value = dateTime;
 
-
-</script>
-  <canvas id="stage"></canvas>
-  
-  <small><a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a></small>
-
-
-</script>
-  <canvas id="stage" ></canvas>
-  
-  <hr/>
-  
-  
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
-  <script>
-
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo';
-
-    fetch(url)
-    .then(data => data.json())
-    .then(json => drawChart(json))
-
-
-    function drawChart(json) {
-      const mydata = {
-        labels: json.daily.time,
-        datasets: [{
-          label: 'Temperatura Max',
-          data: json.daily.temperature_2m_max,
-          borderColor: 'rgb(192, 75, 75)',
-        },{
-          label: 'Temperatura Min',
-          data: json.daily.temperature_2m_min,
-          borderColor: 'rgb(75, 75, 192)',
-        }]
-      }
-
-      new Chart(document.getElementById('stage'), {
-        type: 'line',
-        data: mydata,
-      });
-    }
 
 
   </script>
