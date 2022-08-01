@@ -101,7 +101,7 @@ var dateTime = date+' '+time;
 
     function drawChart(json) {
       const mydata = {
-        labels: json.hourly.time,
+        labels: json.daily.time,
         datasets: [{
           label: 'Precipitación (mm)',
           data: json.daily.precipitation_sum,
