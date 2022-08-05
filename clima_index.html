@@ -1,57 +1,6 @@
 <!DOCTYPE html>
-<html lang="es">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<head>
-	<!-- Hoja de estilos CSS adicionales -->
-		<link rel="stylesheet" type="text/css" href="styles.css">	
-		<link rel="stylesheet" type="text/css" href="style_barra.css">
 <html>
 <head>
-<style>
-h1 {
-  text-shadow: 2px 2px 5px white;
-}
-</style>
-</head>
-<body>
- <title>Plantaciones de caña de azúcar en CoopeVictoria R.L.
- </title>  
-
-<style> 
-	body  {
-	 /* background-image: url("canal.jpg");  */       
-	  background-size: 100% auto;
-	  background-repeat: no-repeat; 
-	  margin: 1%;
-	  
-	}
-</style>
-	
-	<meta charset="UTF-8">
-	
-</script>
-	
-</head>
-	
-<body>
-
-<div class="row" >
-<div class="topnav">
-  	<a class="active" href="index.html">Principal</a>
-  	<a href="smscopevictoria.html">SMS-CoopeVictoria R.L.</a>
-	<a href="clima_index.html">Sección climática</a>
-  	<a href="contactos.html">Contactos</a>
-	
-</div>
-
-	
-
-    
-
-<h1>Sistema de Monitoreo climatico </h1>
-<div>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 * {
@@ -81,7 +30,7 @@ h1 {
 <div class="row">
   <div class="column" style="background-color:white;">
     <h2>Datos de precipitación y evapotranspiración de referencia</h2>
-    <p>Fuente: Open Meteo</p>
+
   <!-- Current Date and Time -->
 Fecha y hora actual:
 <input type="text" id="currentDateTime">
@@ -97,13 +46,12 @@ var dateTime = date+' '+time;
 </script>
   <canvas id="stage"></canvas>
   
-  <small><a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a></small>
-
+  
 
 </script>
   <canvas id="stage" width=2px height=2px></canvas>
   
-  <hr/>
+
   
   
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.js"></script>
@@ -137,45 +85,99 @@ var dateTime = date+' '+time;
 	backgroundColor: "rgba(255,99,132,0.2)",
       });
     }
-
-
+     
   </script>
+  <p>Fuente: Open Meteo</p>
+    <hr/>
 </div>
 
-	<div class="split left">
-  <div class="left">
-  </div>
-  
-  
-  
-  
+    <!-- /////////////////////////////////////////////// Columna 2-->
+    
+       <h2>Datos estación la Argentina</h2>
   
   <div class="column" style="background-color:white;">
-    <h2>Datos estación la Argentina</h2>
-    <p>Fuente: Instituto Meteorológico Nacional</p>
+   
 
-
- 
 	 <!--  /* style="background-color: rgba(1000, 1000, 1000, 0.6)" */ -->
 <embed type="text/html" src="https://www.imn.ac.cr/especial/tablas/argentina.html"  width="400" height="500">
 
   </script>
-</div>
-<h3>Fuente: Instituto Meteorológico Nacional (IMN)</h3>
+
+    <p>Fuente: Instituto Meteorológico Nacional</p>
 <string>Datos sin control de calidad</string>
+  <hr/>
+</div>
 
-	</div>   
+
+
     
-
+  <!-- /////////////////////////////////////////////// Columna 3-->
+  
+  
 <div class="column" style="background-color: white;">
     <h2>Datos climáticos de Windy</h2>
     <p>Puede explorar diferente tipos de datos</p>
-    <iframe width="400" height="350" src="https://embed.windy.com/embed2.html?lat=10.009&lon=-84.272&detailLat=10.070&detailLon=-84.310&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=true&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="1"></iframe>
+    <iframe width="400" height="383" src="https://embed.windy.com/embed2.html?lat=9.877&lon=-84.283&detailLat=9.938&detailLon=-84.045&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=true&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="1"></iframe>
   </script>
+  <p> 
+   
+   
+  </p>
+    <hr/>
   </div>
-</div>   
-  </div>
+  
+ 
+  <!-- /////////////////////////////////////////////// Columna 4-->
+  
+  <div class="column" style="background-color: white;">
+    <h2>Datos climáticos de Windy</h2>
+    
+
+<h3>Datos de temperatura horarios y proyectados</h3>
+<string>Fuente: OpenMeteo</string>
+
+
+
+  <canvas id="stage1"></canvas>
+  
+
+
+  <canvas id="stage1" width= 1px padding= 1px></canvas>
+
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.js"></script>
+  <script>
+
+    const url1 = 'https://api.open-meteo.com/v1/ecmwf?latitude=10.09&longitude=-84.29&hourly=temperature_2m';
+
+    fetch(url1)
+    .then(data => data.json())
+    .then(json => drawChart(json))
+
+
+    function drawChart(json) {
+      const mydata1 = {
+        labels: json.hourly.time,
+        datasets: [{
+          label: 'Precipitación (mm)',
+          data: json.hourly.temperature_2m,
+          borderColor: 'rgb(192, 75, 75)',
+        }]
+      }
+
+      new Chart(document.getElementById('stage1'), {
+        type: 'line',
+        data: mydata1,
+	fill: true,
+	backgroundColor: "rgba(255,99,132,0.2)",
+      });
+    }
+
+
+  </script>
+    <hr/>
 </div>
-	
+
 </body>
 </html>
