@@ -37,12 +37,14 @@ body  {
 <body>
 
 <div class="row" >
+<div class="row" style="background-color:white;">
 <div class="topnav">
   <a class="active" href="index.html">Principal</a>
   <a href="smscopevictoria.html">SMS-CoopeVictoria R.L.</a>
-<a href="clima_index.html">Sección climática</a>
+  <a href="clima_index.html">Sección climática</a>
+   <a href="contactos.html">Contactos</a>
 
-
+</div>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -53,9 +55,9 @@ body  {
 /* Create two equal columns that floats next to each other */
 .column {
   float: left;
-  width: 50%;
-  padding: 10px;
- /* height: 300px; */ /* Should be removed. Only for demonstration */
+  width: 90%;
+  padding: 0px;
+ /* height: 100px;*/  /* Should be removed. Only for demonstration */
 }
 
 /* Clear floats after the columns */
@@ -68,14 +70,16 @@ body  {
 </head>
 <body>
 
-<h2>Datos climáticos</h2>
+
 
 <!-- /////////////////////////////////////////////// Columna 1-->
      
+ 
      
-     
-<div class="row">
-  <div class="column" style="background-color:white;">
+<div class="column">
+  <div class="column" style="background-color:white;height: 10%; width: 50%">
+   <div id="container" style="height: 50px; width: 100px"></div>
+  <h2>Datos climáticos</h2>  
     <h2>Datos de precipitación y evapotranspiración de referencia</h2>
    
   <!-- Current Date and Time -->
@@ -94,7 +98,7 @@ var dateTime = date+' '+time;
   <canvas id="stage2"></canvas>
  
 
-  <canvas id="stage2" width= 1px padding= 1px></canvas>
+
 
  
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.js"></script>
@@ -137,13 +141,14 @@ backgroundColor: "rgba(255,99,132,0.2)",
 
     <!-- /////////////////////////////////////////////// Columna 2-->
    
-       <h2>Datos estación la Argentina</h2>
+       
  
-  <div class="column" style="background-color:white;">
-   
+  <div class="column" style="background-color:white;height: 10%; width: 50%">
+      <div id="container" style="height: 70px; width: 10%"></div>
+<h2>Datos estación la Argentina</h2>
 
 <!--  /* style="background-color: rgba(1000, 1000, 1000, 0.6)" */ -->
-<embed type="text/html" src="https://www.imn.ac.cr/especial/tablas/argentina.html"  width="400" height="500">
+<embed type="text/html" src="https://www.imn.ac.cr/especial/tablas/argentina.html"  width="900" height="500">
 
   </script>
 
@@ -156,29 +161,31 @@ backgroundColor: "rgba(255,99,132,0.2)",
   <!-- /////////////////////////////////////////////// Columna 3-->
  
 
-<div class="column" style="background-color: white;">
+<div class="column" style="background-color: white;height: 10%; width: 50%">
+ <div id="container" style="height: 70px; width: 10%"></div>
     <h2>Datos climáticos de Windy</h2>
     <p>Puede explorar diferente tipos de datos</p>
-    <iframe width="400" height="350" src="https://embed.windy.com/embed2.html?lat=9.877&lon=-84.283&detailLat=9.938&detailLon=-84.045&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=true&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="1"></iframe>
+    <iframe width="700" height="700" src="https://embed.windy.com/embed2.html?lat=9.877&lon=-84.283&detailLat=9.938&detailLon=-84.045&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=true&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="1"></iframe>
   </script>
   </div>
  
  <!-- /////////////////////////////////////////////// Columna 4-->
 
-  <div class="column" style="background-color: white;">
-    <h2>Datos climáticos de Windy</h2>
+
+
+  
+<div class="column" style="background-color: white;height: 10%; width: 50%">
+ <div id="container" style="height: 70px; width: 10%"></div>
    
+
+ <h2>Datos climáticos de Windy</h2>
 
 <h3>Datos de temperatura horarios y proyectados</h3>
 
-<div class="column">
+  
 
-    </div>
+<canvas id="stage1"></canvas>
 
-</script>
-  <canvas id="stage1"></canvas>
-
-  <canvas id="stage1" width= 1px padding= 1px></canvas>
 
  <script src="https://canvasjs.com/assets/script/canvasjs"></script>
   
@@ -208,12 +215,15 @@ backgroundColor: "rgba(255,99,132,0.1)",
       });
     }
     
-     
   </script>
-  <string>Fuente: Windy</string>
 
+   <string>Fuente: Windy </string>  
 
    </script>
   </div>
+
+
+  </div>
+
 </body>
 </html>
