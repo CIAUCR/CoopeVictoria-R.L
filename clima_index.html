@@ -3,9 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
-	<!-- Hoja de estilos CSS adicionales -->
-		<link rel="stylesheet" type="text/css" href="styles.css">	
-		<link rel="stylesheet" type="text/css" href="style_barra.css">
+<!-- Hoja de estilos CSS adicionales -->
+<link rel="stylesheet" type="text/css" href="styles.css">
+<link rel="stylesheet" type="text/css" href="style_barra.css">
 <html>
 <head>
 <style>
@@ -18,33 +18,33 @@ h1 {
  <title>Plantaciones de caña de azúcar en CoopeVictoria R.L.
  </title>  
 
-<style> 
-	body  {
-	 /* background-image: url("canal.jpg");  */       
-	  background-size: 100% auto;
-	  background-repeat: no-repeat; 
-	  margin: 1%;
-	  
-	}
+<style>
+body  {
+/* background-image: url("canal.jpg");  */      
+ background-size: 100% auto;
+ background-repeat: no-repeat;
+ margin: 1%;
+ 
+}
 </style>
-	
-	<meta charset="UTF-8">
-	
+
+<meta charset="UTF-8">
+
 </script>
-	
+
 </head>
-	
+
 <body>
 
 <div class="row" >
 <div class="topnav">
-  	<a class="active" href="index.html">Principal</a>
-  	<a href="smscopevictoria.html">SMS-CoopeVictoria R.L.</a>
-	<a href="clima_index.html">Sección climática</a>
-  	<a href="contactos.html">Contactos</a>
-	
-</div>
+  <a class="active" href="index.html">Principal</a>
+  <a href="smscopevictoria.html">SMS-CoopeVictoria R.L.</a>
+<a href="clima_index.html">Sección climática</a>
 
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 * {
   box-sizing: border-box;
@@ -70,10 +70,14 @@ h1 {
 
 <h2>Datos climáticos</h2>
 
+<!-- /////////////////////////////////////////////// Columna 1-->
+     
+     
+     
 <div class="row">
   <div class="column" style="background-color:white;">
     <h2>Datos de precipitación y evapotranspiración de referencia</h2>
-
+   
   <!-- Current Date and Time -->
 Fecha y hora actual:
 <input type="text" id="currentDateTime">
@@ -87,28 +91,24 @@ var dateTime = date+' '+time;
 
 
 </script>
-  <canvas id="stage"></canvas>
-  
-  
+  <canvas id="stage2"></canvas>
+ 
 
-</script>
-  <canvas id="stage" width=2px height=2px></canvas>
-  
+  <canvas id="stage2" width= 1px padding= 1px></canvas>
 
-  
-  
+ 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.js"></script>
   <script>
 
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=9.94&longitude=-84.09&daily=precipitation_sum,et0_fao_evapotranspiration&timezone=America%2FDenver';
+    const url2 = 'https://api.open-meteo.com/v1/forecast?latitude=9.94&longitude=-84.09&daily=precipitation_sum,et0_fao_evapotranspiration&timezone=America%2FDenver';
 
-    fetch(url)
+    fetch(url2)
     .then(data => data.json())
     .then(json => drawChart(json))
 
 
     function drawChart(json) {
-      const mydata = {
+      const mydata2 = {
         labels: json.daily.time,
         datasets: [{
           label: 'Precipitación (mm)',
@@ -121,75 +121,67 @@ var dateTime = date+' '+time;
         }]
       }
 
-      new Chart(document.getElementById('stage'), {
+      new Chart(document.getElementById('stage2'), {
         type: 'line',
-        data: mydata,
-	fill: true,
-	backgroundColor: "rgba(255,99,132,0.2)",
+        data: mydata2,
+fill: true,
+backgroundColor: "rgba(255,99,132,0.2)",
       });
     }
-     
+
+
   </script>
   <p>Fuente: Open Meteo</p>
-    <hr/>
 </div>
 
+
     <!-- /////////////////////////////////////////////// Columna 2-->
-    
+   
        <h2>Datos estación la Argentina</h2>
-  
+ 
   <div class="column" style="background-color:white;">
    
 
-	 <!--  /* style="background-color: rgba(1000, 1000, 1000, 0.6)" */ -->
+<!--  /* style="background-color: rgba(1000, 1000, 1000, 0.6)" */ -->
 <embed type="text/html" src="https://www.imn.ac.cr/especial/tablas/argentina.html"  width="400" height="500">
 
   </script>
 
     <p>Fuente: Instituto Meteorológico Nacional</p>
 <string>Datos sin control de calidad</string>
-  <hr/>
 </div>
 
-
-
-    
+ 
+   
   <!-- /////////////////////////////////////////////// Columna 3-->
-  
-  
+ 
+
 <div class="column" style="background-color: white;">
     <h2>Datos climáticos de Windy</h2>
     <p>Puede explorar diferente tipos de datos</p>
-    <iframe width="400" height="383" src="https://embed.windy.com/embed2.html?lat=9.877&lon=-84.283&detailLat=9.938&detailLon=-84.045&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=true&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="1"></iframe>
+    <iframe width="400" height="350" src="https://embed.windy.com/embed2.html?lat=9.877&lon=-84.283&detailLat=9.938&detailLon=-84.045&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=true&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="1"></iframe>
   </script>
-  <p> 
-   
-   
-  </p>
-    <hr/>
   </div>
-  
  
-  <!-- /////////////////////////////////////////////// Columna 4-->
-  
+ <!-- /////////////////////////////////////////////// Columna 4-->
+
   <div class="column" style="background-color: white;">
     <h2>Datos climáticos de Windy</h2>
-    
+   
 
 <h3>Datos de temperatura horarios y proyectados</h3>
-<string>Fuente: OpenMeteo</string>
 
+<div class="column">
+      <div id="container" style="height: 40px; width: 100%"></div>
+    </div>
 
-
+</script>
   <canvas id="stage1"></canvas>
-  
-
 
   <canvas id="stage1" width= 1px padding= 1px></canvas>
 
+ <script src="https://canvasjs.com/assets/script/canvasjs"></script>
   
-  
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.js"></script>
   <script>
 
     const url1 = 'https://api.open-meteo.com/v1/ecmwf?latitude=10.09&longitude=-84.29&hourly=temperature_2m';
@@ -200,7 +192,7 @@ var dateTime = date+' '+time;
 
 
     function drawChart(json) {
-      const mydata1 = {
+      const mydata3 = {
         labels: json.hourly.time,
         datasets: [{
           label: 'Precipitación (mm)',
@@ -208,20 +200,18 @@ var dateTime = date+' '+time;
           borderColor: 'rgb(192, 75, 75)',
         }]
       }
-
       new Chart(document.getElementById('stage1'), {
         type: 'line',
-        data: mydata1,
-	fill: true,
-	backgroundColor: "rgba(255,99,132,0.2)",
+        data: mydata3,
+fill: false,
+backgroundColor: "rgba(255,99,132,0.1)",
       });
     }
-
-	  <iframe width="400" height="383" src="https://github.com/CIAUCR/CoopeVictoria-R.L/blob/main/graph_temp_diaria" frameborder="1"></iframe>
+    
+     
+  </script>
+  <string>Fuente: OpenMeteo</string>
 
   </script>
-    <hr/>
-</div>
-
 </body>
 </html>
