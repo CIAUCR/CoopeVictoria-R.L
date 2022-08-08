@@ -129,10 +129,8 @@ fill: true,
 backgroundColor: "rgba(255,99,132,0.2)",
       });
     }
-
-
   </script>
-  <p>Fuente: Open Meteo</p>
+<p>Fuente: Open Meteo</p>
 </div>
 
 
@@ -162,7 +160,7 @@ backgroundColor: "rgba(255,99,132,0.2)",
  <div id="container" style="height: 70%; width: 10%"></div>
     <h2>Datos climáticos de Windy</h2>
     <p>Puede explorar diferente tipos de datos</p>
-    <iframe width="100%" height="700" src="https://embed.windy.com/embed2.html?lat=9.877&lon=-84.283&detailLat=9.938&detailLon=-84.045&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=true&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="1"></iframe>
+    <iframe width="90%" height="700" src="https://embed.windy.com/embed2.html?lat=9.877&lon=-84.283&detailLat=9.938&detailLon=-84.045&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=true&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="1"></iframe>
   </script>
   </div>
  
@@ -200,7 +198,7 @@ backgroundColor: "rgba(255,99,132,0.2)",
       const mydata3 = {
         labels: json.hourly.time,
         datasets: [{
-          label: 'Precipitación (mm)',
+          label: 'Temperatura (C°)',
           data: json.hourly.temperature_2m,
           borderColor: 'rgb(192, 75, 75)',
         }]
@@ -225,3 +223,4 @@ backgroundColor: "rgba(255,99,132,0.1)",
 
 </body>
 </html>
+
