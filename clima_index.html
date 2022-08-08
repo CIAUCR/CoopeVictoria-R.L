@@ -81,6 +81,7 @@ body  {
   <div class="column" style="background-color:white;height: 10%; width: 50%">
    <div id="container" style="height: 50%; width: 100%"></div>
   <h2>Datos climáticos</h2>  
+
     <h2>Datos de precipitación y evapotranspiración de referencia</h2>
    
   <!-- Current Date and Time -->
@@ -101,7 +102,7 @@ var dateTime = date+' '+time;
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.js"></script>
   <script>
 
-    const url2 = 'https://api.open-meteo.com/v1/forecast?latitude=9.94&longitude=-84.09&daily=precipitation_sum,et0_fao_evapotranspiration&timezone=America%2FDenver';
+    const url2 = 'https://api.open-meteo.com/v1/forecast?latitude=10.09&longitude=-84.29&daily=precipitation_sum,et0_fao_evapotranspiration&timezone=America%2FDenver';
 
     fetch(url2)
     .then(data => data.json())
@@ -160,10 +161,11 @@ backgroundColor: "rgba(255,99,132,0.2)",
  <div id="container" style="height: 70%; width: 10%"></div>
     <h2>Datos climáticos de Windy</h2>
     <p>Puede explorar diferente tipos de datos</p>
-    <iframe width="90%" height="700" src="https://embed.windy.com/embed2.html?lat=9.877&lon=-84.283&detailLat=9.938&detailLon=-84.045&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=true&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="1"></iframe>
+    <iframe width="80%" height="700" src="https://embed.windy.com/embed2.html?lat=9.877&lon=-84.283&detailLat=9.938&detailLon=-84.045&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=true&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="1"></iframe>
   </script>
+   <p>Fuente: Windy.com </p>
   </div>
- 
+ <br><p> </p></br>
  <!-- /////////////////////////////////////////////// Columna 4-->
 
 
@@ -174,7 +176,7 @@ backgroundColor: "rgba(255,99,132,0.2)",
  <div id="container" style="height: 70%; width: 10%"></div>
    
 
- <h2>Datos climáticos de Windy</h2>
+ <h2>Datos climáticos de Open Meteo</h2>
 
 <h3>Datos de temperatura horarios y proyectados</h3>
 
@@ -213,13 +215,29 @@ backgroundColor: "rgba(255,99,132,0.1)",
     
   </script>
 
-   <string>Fuente: Windy </string>  
+   <string>Fuente: OpenMeteo </string>  
 
    </script>
   </div>
 
+<br><br>
 
   </div>
+
+
+<br><p> </p></br>
+ 
+
+
+<br><div class="row" style="background-color: white;height: 10%; width: 90%"></br>
+
+<hr/>
+
+<h2>Notas importantes:</h2>
+
+<p>Todos los datos climáticos están en relación a la ubicación de CoopeVictoria R.L.</p>
+<p>Los datos de la estación La Argentina provienen del Instituto Meteorológico Nacional de Costa Rica</p>
+
 
 </body>
 </html>
