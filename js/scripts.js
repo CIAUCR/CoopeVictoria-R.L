@@ -233,27 +233,73 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 		style: function(feature) {
 			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
 		},
-		onEachFeature: function drawChart(json) {
-      const mydata2 = {
-        labels: json.daily.time,
-        datasets: [{
-          label: 'Precipitación (mm)',
-          data: json.properties.PROD_16,
-          borderColor: 'rgb(192, 75, 75)',
-        },{
-          label: 'ETo FAO (mm)',
-          data: json.json.properties.PROD_17,
-          borderColor: 'rgb(75, 75, 192)',
-        }]
-      }
-      new Chart(document, {
-        type: 'line',
-        data: mydata2,
-fill: true,
-backgroundColor: "rgba(255,99,132,0.2)",
-      });
-    }			
-	}).addTo(map);
+		onEachFeature: function (feature, layer) {
+                    layer.on('click', function(e){
+
+                    var chartplotoptions ={
+                        chart: {
+                            type: 'area'
+                        },
+                        title: {
+                            text: 'Aquifer Units'
+                        },
+
+                        xAxis: {
+                            allowDecimals: false,
+                            labels: {
+                                formatter: function () {
+                                    return this.value; 
+                                }
+                            }
+                        },
+                        yAxis: {
+                                startOnTick: false,
+                                minPadding: 0.05,
+                            title: {
+                                text: 'Elevation from Sea Level (ft)',
+
+                            },
+                            labels: {
+                                formatter: function () {
+                                    return this.value ;
+                                }
+                            }
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}{point.y}'
+                        },
+                        plotOptions: {
+
+                                area: {
+                                pointStart: 0,
+                                threshold: 657,
+                                marker: {
+                                    enabled: false,
+                                    symbol: 'circle',
+                                    radius: 2,
+                                    states: {
+                                        hover: {
+                                            enabled: true
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        series: [{
+                            name: 'Surface',
+                            data: [parseFloat(feature.properties.PROD_16),parseFloat(feature.properties.PROD_16)]
+                        }, 
+
+                        ]
+                    };
+
+
+                    $('#chartcontainer').highcharts(chartplotoptions);
+                    layer.bindPopup($('#chartcontainer').html());
+                    layer.openPopup();  
+                    });
+                }
+            }).addTo(map);
 	control_layers.addOverlay(layer_geojson_historial, 'Historial de Cosecha por Finca');
 });
 
