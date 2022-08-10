@@ -216,7 +216,37 @@ backgroundColor: "rgba(255,99,132,0.1)",
   </script>
 
    <string>Fuente: OpenMeteo </string>  
+</script>
+  <canvas id="stage2"></canvas>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.js"></script>
+  <script>
 
+    const url2 = 'https://github.com/CIAUCR/CoopeVictoria-R.L/blob/main/rendimientohistorico.geojson';
+
+    fetch(url2)
+    .then(data => data.json())
+    .then(json => drawChart(json))
+
+
+    function drawChart(json) {
+      const mydata3 = {
+        labels: json.properties.PROD_16,
+        datasets: [{
+          label: 'Temperatura (C°)',
+          data: json.properties.PROD_16,
+          borderColor: 'rgb(192, 75, 75)',
+        }]
+      }
+      new Chart(document.getElementById('stage1'), {
+        type: 'line',
+        data: mydata3,
+fill: false,
+backgroundColor: "rgba(255,99,132,0.1)",
+      });
+    }
+</script>
+<p>Fuente: OpenMeteo</p>
    </script>
   </div>
 
