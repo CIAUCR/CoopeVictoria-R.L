@@ -1,4 +1,4 @@
-//Sistema de monitoreo de cultivo en CoopeVictoria R.L.
+//Sistema de monitoreo de cultivo en CoopeVictoria R.L. 
 
 // Mapa base
 var map = L.map("mapid");
@@ -226,27 +226,36 @@ $.getJSON("distritos_influencia.geojson", function(geodata) {
 });
 
 
+
 // Fincas de CoopeVictoria
 $.getJSON("rendimientohistorico.geojson", function(geodata) {
 	var layer_geojson_historial = L.geoJson(geodata, {
 		style: function(feature) {
 			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
 		},
-		onEachFeature: function(feature, layer) {
-			var popupText = "Finca: " + feature.properties.FINCA + "<br>" + "Zafra 2016-2017: " + feature.properties.PROD_16 +  " Ton/ha" + "<br>" + 
-			   "Zafra 2017-2018: " + feature.properties.PROD_17 + " Ton/ha" +"<br>" + "Zafra 2018-2019: " + feature.properties.PROD_18 + " Ton/ha" +"<br>" + 
-			   "Zafra 2019-2020: " + feature.properties.PROD_19+" Ton/ha" +"<br>" + "Zafra 2020-2021 (Estimada): " + feature.properties.PROD_20 +" Ton/ha" ;
-			layer.bindPopup(popupText);
-		}			
+		onEachFeature: function drawChart(json) {
+      const mydata2 = {
+        labels: json.daily.time,
+        datasets: [{
+          label: 'Precipitación (mm)',
+          data: json.properties.PROD_16,
+          borderColor: 'rgb(192, 75, 75)',
+        },{
+          label: 'ETo FAO (mm)',
+          data: json.json.properties.PROD_17,
+          borderColor: 'rgb(75, 75, 192)',
+        }]
+      }
+      new Chart(document.getElementById('stage2'), {
+        type: 'line',
+        data: mydata2,
+fill: true,
+backgroundColor: "rgba(255,99,132,0.2)",
+      });
+    }			
 	}).addTo(map);
 	control_layers.addOverlay(layer_geojson_historial, 'Historial de Cosecha por Finca');
 });
-
-
-
-
-
-
 
 
 // Ubicacion del control de capas
