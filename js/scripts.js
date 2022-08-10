@@ -242,6 +242,28 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 	control_layers.addOverlay(layer_geojson_historial, 'Historial de Cosecha por Finca');
 });
 
+// Fincas de CoopeVictoria
+$.getJSON("rendimientohistorico.geojson", function(geodata) {
+	var layer_geojson_historial = L.geoJson(geodata, {
+		style: function(feature) {
+			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
+		},
+		
+		var popupText = "Finca: " + feature.properties.FINCA + "<br>" + "Zafra 2016-2017: " + feature.properties.PROD_16 +  " Ton/ha" + "<br>" + 
+			    "Zafra 2017-2018: " + feature.properties.PROD_17 + " Ton/ha" +"<br>" + "Zafra 2018-2019: " + feature.properties.PROD_18 + " Ton/ha" +"<br>" + 
+			    "Zafra 2019-2020: " + feature.properties.PROD_19+" Ton/ha" +"<br>" + "Zafra 2020-2021 (Estimada): " + feature.properties.PROD_20 +" Ton/ha" ;
+			layer.bindPopup(popupText);
+	
+		onEachFeature: new Chart("myChart", {type: "scatter", data: { datasets: [{ pointRadius: 4, pointBackgroundColor: "rgba(0,0,255,1)",
+      data: popupText
+    }]
+  },
+  options:{...}
+});				
+	}).addTo(map);
+	control_layers.addOverlay(layer_geojson_historial, 'Historial de Cosecha por Finca');
+});
+
 
 
 
