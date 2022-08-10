@@ -246,7 +246,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
           borderColor: 'rgb(75, 75, 192)',
         }]
       }
-      new Chart(document.getElementById('stage2'), {
+      new Chart(document, {
         type: 'line',
         data: mydata2,
 fill: true,
