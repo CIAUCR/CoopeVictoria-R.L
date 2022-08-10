@@ -287,7 +287,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
                         },
                         series: [{
                             name: 'Surface',
-                            data: [parseFloat(feature.properties.PROD_16),parseFloat(feature.properties.PROD_16)]
+                            data: [parseFloat(feature.properties.PROD_16),parseFloat(feature.properties.PROD_17)]
                         }, 
 
                         ]
@@ -295,8 +295,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 
 
                     $('#chartcontainer').highcharts(chartplotoptions);
-                    layer.bindPopup($('#chartcontainer').html());
-                    layer.openPopup();  
+                     
                     });
                 }
             }).addTo(map);
