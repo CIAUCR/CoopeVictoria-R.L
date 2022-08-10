@@ -234,69 +234,23 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
 		},
 		onEachFeature: function (feature, layer) {
-                    layer.on('click', function(e){
-
-                    var chartplotoptions ={
-                        chart: {
-                            type: 'area'
-                        },
-                        title: {
-                            text: 'Aquifer Units'
-                        },
-
-                        xAxis: {
-                            allowDecimals: false,
-                            labels: {
-                                formatter: function () {
-                                    return this.value; 
-                                }
-                            }
-                        },
-                        yAxis: {
-                                startOnTick: false,
-                                minPadding: 0.05,
-                            title: {
-                                text: 'Elevation from Sea Level (ft)',
-
-                            },
-                            labels: {
-                                formatter: function () {
-                                    return this.value ;
-                                }
-                            }
-                        },
-                        tooltip: {
-                            pointFormat: '{series.name}{point.y}'
-                        },
-                        plotOptions: {
-
-                                area: {
-                                pointStart: 0,
-                                threshold: 657,
-                                marker: {
-                                    enabled: false,
-                                    symbol: 'circle',
-                                    radius: 2,
-                                    states: {
-                                        hover: {
-                                            enabled: true
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        series: [{
-                            name: 'Surface',
-                            data: [parseFloat(feature.properties.PROD_16),parseFloat(feature.properties.PROD_17)]
-                        }, 
-
-                        ]
-                    };
-
-
-                    $('#chartcontainer').highcharts(chartplotoptions);
-                     
-                    });
+                    <script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+			<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+			var yValues = [feature.properties.PROD_16,feature.properties.PROD_17];
+			var xValues = [2016,2017];
+			var myChart = new Chart("myChart", {
+				type: "scatter",
+				data: {
+					labels: xValues,
+					datasets: [{
+						backgroundColor: "rgba(0,0,0,1.0)",
+						borderColor: "rgba(0,0,0,0.1)",
+						data: yValues
+					}],
+				options: {}
+			});
                 }
             }).addTo(map);
 	control_layers.addOverlay(layer_geojson_historial, 'Historial de Cosecha por Finca');
