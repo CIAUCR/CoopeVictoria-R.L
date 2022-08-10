@@ -242,27 +242,6 @@ $.getJSON("distritos_influencia.geojson", function(geodata) {
 	//control_layers.addOverlay(layer_geojson_historial, 'Historial de Cosecha por Finca');
 //});
 
-// Fincas de CoopeVictoria
-$.getJSON("rendimientohistorico.geojson", function(geodata) {
-	var layer_geojson_historial = L.geoJson(geodata, {
-		style: function(feature) {
-			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
-		},
-		
-		var xyValues = [ 
-		{x:feature.properties.PROD_16, y:7},
-		{x:feature.properties.PROD_17, y:8},
-	        {x:feature.properties.PROD_18, y:8}]
-	
-		onEachFeature: new Chart("myChart", {type: "scatter", data: { datasets: [{ pointRadius: 4, pointBackgroundColor: "rgba(0,0,255,1)",
-      data: xyValues
-    }]
-  },
-  options:{...}
-});				
-	}).addTo(map);
-	control_layers.addOverlay(layer_geojson_historial, 'Historial de Cosecha por Finca');
-});
 
 
 
