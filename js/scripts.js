@@ -233,47 +233,18 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 		style: function(feature) {
 			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
 		},
-		onEachFeature: function (feature, layer) {
-        layer.bindTooltip("Click en  gráfico de producción historica", {
-        sticky: true,
-        direction: "top"
-      });
+		onEachFeature: function(feature, layer) {
+          var div = $('<div id="' + feature.properties.name + '" style="width: 200px; height:200px;"><svg/></div>')[0];
+          var popup = L.popup().setContent(div);
 
-      layer.on({
-        click: function (e) {  
-          map.info.show("<div id='charts'></div> <p>Content for: <b>"+"</b></p>");
-          // Render a chart into the info panel.
-          $wt.render("charts", {
-            "service": "charts",
-            "provider": "highcharts",
-            "version": "2.0",
-            "data": {
-              "chart": {
-                "type": "line",
-                "height" : 30
-              },
-              "title": {
-                "text": "Support requests for: " 
-              },
-              "xAxis": {
-                "categories": ["2016","2017","2018"]
-              },
-              "yAxis": {
-                "allowDecimals": false,
-                "title": {
-                  "text": ""
-                }
-              },
-              "series": [{
-                  "name": "",
-                  "data": [feature.properties.PROD_16,feature.properties.PROD_17,feature.properties.PROD_18]
-              }]
-            }
-          });
+          layer.bindPopup(popup);
+
+          if (feature.properties.name === 'test1') {
+            var svg = d3.select(div).select("svg").attr("width", 200).attr("height", 200);
+            svg.append("rect").attr("width", 150).attr("height", 150).style("fill", "lightBlue");
+          }
         }
-      });
-                }
-            }).addTo(map);
+      }).addTo(map);
 	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
 });
 
