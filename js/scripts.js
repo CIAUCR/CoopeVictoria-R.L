@@ -233,39 +233,15 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 		style: function(feature) {
 			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
 		},
+		
 		onEachFeature: function(feature, layer) {
-          var div = $('<div id="' + feature.properties.FINCA + '" style="width: 200px; height:200px;"><svg/></div>')[0];
-          var popup = L.popup().setContent(div);
-
-          layer.bindPopup(popup);
-
-          if (feature.properties.name === 'test1') {
-            var svg = d3.select(div).select("svg").attr("width", 200).attr("height", 200);
-            svg.append("rect").attr("width", 150).attr("height", 150).style("fill", "lightBlue");
-		var xyValues = [
-			{x:50, y:7},
-			{x:60, y:8},
-			{x:70, y:8}];
-		 
-		  new Chart("myChart", {
-			  type: "scatter",
-			  data: {
-				  datasets: [{
-					  pointRadius: 4,
-					  pointBackgroundColor: "rgb(0,0,255)",
-					  data: xyValues
-				  }]
-			  },
-			  options: {
-				  legend: {display: false},
-				  scales: {
-					  xAxes: [{ticks: {min: 40, max:160}}],
-					  yAxes: [{ticks: {min: 6, max:16}}],
-				  }
-			  }
-		  });  
-            svg.append("chart").attr("width", 150).attr("height", 150).style("fill", "lightBlue");
-          }
+			layer.bindTooltip("Click me to see the charts", {
+				sticky: true,
+				direction: "top"
+			});
+			
+		
+          
         }
       }).addTo(map);
 	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
