@@ -271,7 +271,6 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
               }]
             }
           });
-		layer.bindPopup(PROD_17)
         }
       });
                 }
