@@ -243,15 +243,33 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
         click: function (e) {  
           //map.info.show("<div id='charts'></div> <p>Content for: <b>"+ PROD_17 +"</b></p>");
           // Render a chart into the info panel.
-		var div = $('<div id="' + feature.properties.FINCA + '" style="width: 200px; height:200px;"><svg/></div>')[0];
-          var popup = L.popup().setContent(div);
-
-              layer.bindPopup(popup);
-              var svg = d3.select(div).select("svg").attr("width", 200).attr("height", 200);
-        //    var svg = d3.select("#test1").select("svg").attr("width", 200).attr("height", 200);
-        //		THE ABOVE DOES NOT WORK
-              svg.append("rect").attr("width", 150).attr("height", 150).style("fill", "lightBlue");
-          }
+          $wt.render("charts", {
+            "service": "charts",
+            "provider": "highcharts",
+            "version": "2.0",
+            "data": {
+              "chart": {
+                "type": "line",
+                "height" : 30
+              },
+              "title": {
+                "text": "Support requests for: " + feature.properties.PROD_17
+              },
+              "xAxis": {
+                "categories": ["2016","2017","2018"]
+              },
+              "yAxis": {
+                "allowDecimals": false,
+                "title": {
+                  "text": "Number of requests"
+                }
+              },
+              "series": [{
+                  "name": "PROD",
+                  "data": [feature.properties.PROD_16,feature.properties.PROD_17,feature.properties.PROD_18]
+              }]
+            }
+          });
         }
       });
                 }
