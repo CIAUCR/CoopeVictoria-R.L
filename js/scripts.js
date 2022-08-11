@@ -234,10 +234,9 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
 		},
 		onEachFeature: function (feature, layer) {
-                    <script
-src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-</script>
-			<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+			    </script>
+			<canvas id="myChart" style="width:10%;max-width:700px"></canvas>
 			var yValues = [feature.properties.PROD_16,feature.properties.PROD_17];
 			var xValues = [2016,2017];
 			var myChart = new Chart("myChart", {
@@ -249,11 +248,12 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 						borderColor: "rgba(0,0,0,0.1)",
 						data: yValues
 					}],
+					}
 				options: {}
 			});
                 }
             }).addTo(map);
-	control_layers.addOverlay(layer_geojson_historial, 'Historial de Cosecha por Finca');
+	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
 });
 
 
