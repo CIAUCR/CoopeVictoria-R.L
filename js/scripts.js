@@ -243,33 +243,36 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
         click: function (e) {  
           //map.info.show("<div id='charts'></div> <p>Content for: <b>"+ PROD_17 +"</b></p>");
           // Render a chart into the info panel.
-          $wt.render("charts", {
-            "service": "charts",
-            "provider": "highcharts",
-            "version": "2.0",
-            "data": {
-              "chart": {
-                "type": "line",
-                "height" : 30
-              },
-              "title": {
-                "text": "Support requests for: " + feature.properties.PROD_17
-              },
-              "xAxis": {
-                "categories": ["2016","2017","2018"]
-              },
-              "yAxis": {
-                "allowDecimals": false,
-                "title": {
-                  "text": "Number of requests"
-                }
-              },
-              "series": [{
-                  "name": "PROD",
-                  "data": [feature.properties.PROD_16,feature.properties.PROD_17,feature.properties.PROD_18]
-              }]
-            }
-          });
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<body>
+<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+
+<script>
+var xyValues = [
+  {x: feature.properties.PROD_16, y:2016},
+  {x:feature.properties.PROD_17, y:2017},
+  {x:feature.properties.PROD_18, y:2018}
+];
+
+new Chart("myChart", {
+  type: "scatter",
+  data: {
+    datasets: [{
+      pointRadius: 4,
+      pointBackgroundColor: "rgb(0,0,255)",
+      data: xyValues
+    }]
+  },
+	options: {
+		legend: {display: false},
+		scales: {
+			xAxes: [{ticks: {min: 40, max:160}}],
+			yAxes: [{ticks: {min: 6, max:16}}],
+		}
+	}
+});
+
+		</script>
         }
       });
                 }
