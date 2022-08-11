@@ -227,55 +227,7 @@ $.getJSON("distritos_influencia.geojson", function(geodata) {
 
 
 
-// Fincas de CoopeVictoria
-$.getJSON("rendimientohistorico.geojson", function(geodata) {
-	var layer_geojson_historial = L.geoJson(geodata, {
-		style: function(feature) {
-			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
-		},
-		onEachFeature: function (feature, layer) {
-        layer.bindTooltip("Click en el gráfico para ver la producción historica", {
-        sticky: true,
-        direction: "top"
-      });
 
-      layer.on({
-        click: function (e) {  
-          //map.info.show("<div id='charts'></div> <p>Content for: <b>"+"</b></p>");
-          // Render a chart into the info panel.
-          $L.render("charts", {
-            "service": "charts",
-            "provider": "highcharts",
-            "version": "2.0",
-            "data": {
-              "chart": {
-                "type": "line",
-                "height" : 30
-              },
-              "title": {
-                "text": "Support requests for: " + feature.properties.PROD_17
-              },
-              "xAxis": {
-                "categories": ["2016","2017","2018"]
-              },
-              "yAxis": {
-                "allowDecimals": false,
-                "title": {
-                  "text": "Number of requests"
-                }
-              },
-              "series": [{
-                  "name": "PROD",
-                  "data": [feature.properties.PROD_16,feature.properties.PROD_17,feature.properties.PROD_18]
-              }]
-            }
-          });
-        }
-      });
-                }
-            }).addTo(map);
-	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
-});
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
