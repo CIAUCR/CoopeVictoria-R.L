@@ -245,9 +245,9 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 
       layer.on({
         click: function (e) {  
-          //map.info.show("<div id='charts'></div> <p>Content for: <b>"+ PROD_17 +"</b></p>");
+          //map.info.show("<div id='charts'></div> <p>Content for: <b>");
           // Render a chart into the info panel.
-          $wt.render("charts", {
+         ReactDOM.render("charts", {
             "service": "charts",
             "provider": "highcharts",
             "version": "2.0",
@@ -257,7 +257,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
                 "height" : 30
               },
               "title": {
-                "text": "Support requests for: " + feature.properties.PROD_17
+                "text": "Support requests for: " 
               },
               "xAxis": {
                 "categories": ["2016","2017","2018"]
