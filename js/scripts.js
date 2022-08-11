@@ -233,26 +233,30 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 		style: function(feature) {
 			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
 		},
-		
-		onEachFeature: function(feature, layer) {
-			layer.bindTooltip("Click me to see the charts", {
-				sticky: true,
-				direction: "top"
-			});
-		$.render("charts", {
+		onEachFeature: function (feature, layer) {
+        layer.bindTooltip("Click en el gráfico de producción historica", {
+        sticky: true,
+        direction: "top"
+      });
+
+      layer.on({
+        click: function (e) {  
+          //map.info.show("<div id='charts'></div> <p>Content for: <b>"+ PROD_17 +"</b></p>");
+          // Render a chart into the info panel.
+          $.render("charts", {
             "service": "charts",
             "provider": "highcharts",
             "version": "2.0",
             "data": {
               "chart": {
                 "type": "line",
-                "height" : 300
+                "height" : 30
               },
               "title": {
-                "text": "Support requests for: " 
+                "text": "Support requests for: " + feature.properties.PROD_17
               },
               "xAxis": {
-                "categories": ["Q1","Q2","Q3","Q4"]
+                "categories": ["2016","2017","2018"]
               },
               "yAxis": {
                 "allowDecimals": false,
@@ -261,16 +265,15 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
                 }
               },
               "series": [{
-                  "name": "Support requests reported by e-mail",
-                  "data": [832,643,726,214]
+                  "name": "PROD",
+                  "data": [feature.properties.PROD_16,feature.properties.PROD_17,feature.properties.PROD_18]
               }]
             }
           });
         }
       });
-
-    }
-  }).addTo(map);
+                }
+            }).addTo(map);
 	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
 });
 
