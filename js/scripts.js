@@ -234,31 +234,45 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
 		},
 		onEachFeature: function (feature, layer) {
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-			<body>
-			    <canvas id="myChart" style="width:10%;max-width:600px"></canvas>
-			<script>
-			var yValues = [feature.properties.PROD_16,feature.properties.PROD_17];
-			var xValues = [2016,2017];
-			new Chart("myChart", { type: "line",
-					      data: {
-						      labels: xValues,
-						      datasets: [{
-							      fill: false,
-							      lineTension: 0,
-							      backgroundColor: "rgba(0,0,255,1.0)",
-							      borderColor: "rgba(0,0,255,0.1)",
-							      data: yValues
-						      }]
-					      },
-					      options: {
-						      legend: {display: false},
-						      scales: {
-							      yAxes: [{ticks: {min: 6, max:16}}],
-						      }
-					      }
-					     });
-			</script>
+        layer.bindTooltip("Click me to see the charts", {
+        sticky: true,
+        direction: "top"
+      });
+
+      layer.on({
+        click: function (e) {
+          var CNTR_ID = layer.feature.properties.PROD_17;
+          map.info.show("<div id='charts'></div> <p>Content for: <b>"+ CNTR_ID +"</b></p>");
+          // Render a chart into the info panel.
+          $wt.render("charts", {
+            "service": "charts",
+            "provider": "highcharts",
+            "version": "2.0",
+            "data": {
+              "chart": {
+                "type": "line",
+                "height" : 300
+              },
+              "title": {
+                "text": "Support requests for: " + PROD_17
+              },
+              "xAxis": {
+                "categories": ["Q1","Q2","Q3","Q4"]
+              },
+              "yAxis": {
+                "allowDecimals": false,
+                "title": {
+                  "text": "Number of requests"
+                }
+              },
+              "series": [{
+                  "name": "Support requests reported by e-mail",
+                  "data": [832,643,726,214]
+              }]
+            }
+          });
+        }
+      });
                 }
             }).addTo(map);
 	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
