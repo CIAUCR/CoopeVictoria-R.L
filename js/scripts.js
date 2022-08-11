@@ -277,6 +277,65 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
 });
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Fincas de CoopeVictoria
+L.wt.countries([{level: 0, countries: ["FR","BE"]}], {
+
+    // Bind events here
+	onEachFeature: function (feature, layer) {
+        layer.bindTooltip("Click en el gráfico para ver la producción historica", {
+        sticky: true,
+        direction: "top"
+      });
+
+      layer.on({
+        click: function (e) {  
+          //map.info.show("<div id='charts'></div> <p>Content for: <b>"+"</b></p>");
+          // Render a chart into the info panel.
+          $wt.render("charts", {
+            "service": "charts",
+            "provider": "highcharts",
+            "version": "2.0",
+            "data": {
+              "chart": {
+                "type": "line",
+                "height" : 30
+              },
+              "title": {
+                "text": "Support requests for: " + feature.properties.PROD_17
+              },
+              "xAxis": {
+                "categories": ["2016","2017","2018"]
+              },
+              "yAxis": {
+                "allowDecimals": false,
+                "title": {
+                  "text": "Number of requests"
+                }
+              },
+              "series": [{
+                  "name": "PROD",
+                  "data": [feature.properties.PROD_16,feature.properties.PROD_17,feature.properties.PROD_18]
+              }]
+            }
+          });
+        }
+      });
+                }
+            }).addTo(map);
+	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
+});
+
+
+
+
+
+
+
+
+
+
 
 // Ubicacion del control de capas
 control_layers = L.control.layers(baseMaps, overlayMaps, {position:'topright', "autoZIndex": true, collapsed:true}).addTo(map);	
