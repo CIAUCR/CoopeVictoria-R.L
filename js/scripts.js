@@ -241,9 +241,9 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 
       layer.on({
         click: function (e) {  
-          //map.info.show("<div id='charts'></div> <p>Content for: <b>"+ PROD_17 +"</b></p>");
+          //map.info.show("<div id='charts'></div> <p>Content for: <b>"+"</b></p>");
           // Render a chart into the info panel.
-          $.render("charts", {
+          $L.render("charts", {
             "service": "charts",
             "provider": "highcharts",
             "version": "2.0",
