@@ -239,11 +239,38 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 				sticky: true,
 				direction: "top"
 			});
-			
-		
-          
+		$.render("charts", {
+            "service": "charts",
+            "provider": "highcharts",
+            "version": "2.0",
+            "data": {
+              "chart": {
+                "type": "line",
+                "height" : 300
+              },
+              "title": {
+                "text": "Support requests for: " 
+              },
+              "xAxis": {
+                "categories": ["Q1","Q2","Q3","Q4"]
+              },
+              "yAxis": {
+                "allowDecimals": false,
+                "title": {
+                  "text": "Number of requests"
+                }
+              },
+              "series": [{
+                  "name": "Support requests reported by e-mail",
+                  "data": [832,643,726,214]
+              }]
+            }
+          });
         }
-      }).addTo(map);
+      });
+
+    }
+  }).addTo(map);
 	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
 });
 
