@@ -243,30 +243,15 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
         click: function (e) {  
           //map.info.show("<div id='charts'></div> <p>Content for: <b>"+ PROD_17 +"</b></p>");
           // Render a chart into the info panel.
+		var div = $('<div id="' + feature.properties.FINCA + '" style="width: 200px; height:200px;"><svg/></div>')[0];
+          var popup = L.popup().setContent(div);
 
-var xyValues = [
-  {x: feature.properties.PROD_16, y:2016},
-  {x:feature.properties.PROD_17, y:2017},
-  {x:feature.properties.PROD_18, y:2018}
-];
-
-new Chart("myChart", {
-  type: "scatter",
-  data: {
-    datasets: [{
-      pointRadius: 4,
-      pointBackgroundColor: "rgb(0,0,255)",
-      data: xyValues
-    }]
-  },
-	options: {
-		legend: {display: false},
-		scales: {
-			xAxes: [{ticks: {min: 40, max:160}}],
-			yAxes: [{ticks: {min: 6, max:16}}],
-		}
-	}
-});
+              layer.bindPopup(popup);
+              var svg = d3.select(div).select("svg").attr("width", 200).attr("height", 200);
+        //    var svg = d3.select("#test1").select("svg").attr("width", 200).attr("height", 200);
+        //		THE ABOVE DOES NOT WORK
+              svg.append("rect").attr("width", 150).attr("height", 150).style("fill", "lightBlue");
+          }
         }
       });
                 }
