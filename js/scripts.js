@@ -241,7 +241,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 
       layer.on({
         click: function (e) {
-          var PROD_17 = layer_geojson_historial;
+          var PROD_17 = feature.properties;
           map.info.show("<div id='charts'></div> <p>Content for: <b>"+ PROD_17 +"</b></p>");
           // Render a chart into the info panel.
           $wt.render("charts", {
@@ -251,7 +251,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
             "data": {
               "chart": {
                 "type": "line",
-                "height" : 300
+                "height" : 30
               },
               "title": {
                 "text": "Support requests for: " + PROD_17
