@@ -234,7 +234,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
 		},
 		onEachFeature: function(feature, layer) {
-          var div = $('<div id="' + feature.properties.name + '" style="width: 200px; height:200px;"><svg/></div>')[0];
+          var div = $('<div id="' + feature.properties.FINCA + '" style="width: 200px; height:200px;"><svg/></div>')[0];
           var popup = L.popup().setContent(div);
 
           layer.bindPopup(popup);
