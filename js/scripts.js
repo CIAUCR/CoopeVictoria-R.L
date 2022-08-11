@@ -243,10 +243,6 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
         click: function (e) {  
           //map.info.show("<div id='charts'></div> <p>Content for: <b>"+ PROD_17 +"</b></p>");
           // Render a chart into the info panel.
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-<body>
-<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
-
 
 var xyValues = [
   {x: feature.properties.PROD_16, y:2016},
