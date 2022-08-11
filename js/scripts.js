@@ -236,7 +236,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 		onEachFeature: function (feature, layer) {
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 			<body>
-			    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+			    <canvas id="myChart" style="width:10%;max-width:600px"></canvas>
 			<script>
 			var yValues = [feature.properties.PROD_16,feature.properties.PROD_17];
 			var xValues = [2016,2017];
