@@ -234,7 +234,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
 		},
 		onEachFeature: function (feature, layer) {
-        layer.bindTooltip("Click me to see the charts", {
+        layer.bindTooltip("Click para ver el gráfico de producción historica", {
         sticky: true,
         direction: "top"
       });
@@ -242,7 +242,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
       layer.on({
         click: function (e) {
           var CNTR_ID = layer.feature.properties.PROD_17;
-          map.info.show("<div id='charts'></div> <p>Content for: <b>"+ CNTR_ID +"</b></p>");
+          map.info.show("<div id='charts'></div> <p>Content for: <b>"+ PROD_17 +"</b></p>");
           // Render a chart into the info panel.
           $wt.render("charts", {
             "service": "charts",
