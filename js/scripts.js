@@ -232,18 +232,20 @@ $.getJSON("distritos_influencia.geojson", function(geodata) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Fincas de CoopeVictoria
-L.wt.countries([{level: 0, countries: ["FR","BE"]}], {
-
-    // Bind events here
-	onEachFeature: function (feature, layer) {
-        layer.bindTooltip("Click en el gráfico para ver la producción historica", {
+$.getJSON("rendimientohistorico.geojson", function(geodata) {
+	var layer_geojson_historial = L.geoJson(geodata, {
+		style: function(feature) {
+			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
+		},
+		onEachFeature: function (feature, layer) {
+        layer.bindTooltip("Click en el gráfico de producción historica", {
         sticky: true,
         direction: "top"
       });
 
       layer.on({
         click: function (e) {  
-          //map.info.show("<div id='charts'></div> <p>Content for: <b>"+"</b></p>");
+          //map.info.show("<div id='charts'></div> <p>Content for: <b>"+ PROD_17 +"</b></p>");
           // Render a chart into the info panel.
           $wt.render("charts", {
             "service": "charts",
@@ -276,7 +278,7 @@ L.wt.countries([{level: 0, countries: ["FR","BE"]}], {
       });
                 }
             }).addTo(map);
-	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca 2');
+	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
 });
 
 
