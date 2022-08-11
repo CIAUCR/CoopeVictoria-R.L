@@ -257,7 +257,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
                 "text": "Support requests for: " + PROD_17
               },
               "xAxis": {
-                "categories": ["Q1","Q2","Q3","Q4"]
+                "categories": ["2016","2017","2018"]
               },
               "yAxis": {
                 "allowDecimals": false,
@@ -266,8 +266,8 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
                 }
               },
               "series": [{
-                  "name": "Support requests reported by e-mail",
-                  "data": [832,643,726,214]
+                  "name": "PROD",
+                  "data": [feature.properties.PROD_16,feature.properties.PROD_17,feature.properties.PROD_18]
               }]
             }
           });
