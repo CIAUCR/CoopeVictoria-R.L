@@ -247,7 +247,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 <body>
 <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
 
-<script>
+
 var xyValues = [
   {x: feature.properties.PROD_16, y:2016},
   {x:feature.properties.PROD_17, y:2017},
@@ -271,8 +271,6 @@ new Chart("myChart", {
 		}
 	}
 });
-
-		</script>
         }
       });
                 }
