@@ -324,7 +324,7 @@ L.wt.countries([{level: 0, countries: ["FR","BE"]}], {
       });
                 }
             }).addTo(map);
-	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
+	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca 2');
 });
 
 
