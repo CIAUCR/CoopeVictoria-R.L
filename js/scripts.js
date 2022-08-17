@@ -245,37 +245,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 
       layer.on({
         click: function (e) {  
-          //map.info.show("<div id='charts'></div> <p>Content for: <b>");
-          // Render a chart into the info panel.
-         $.render("charts", {
-            "service": "charts",
-            "provider": "highcharts",
-            "version": "2.0",
-            "data": {
-              "chart": {
-                "type": "line",
-                "height" : 30
-              },
-              "title": {
-                "text": "Support requests for: " 
-              },
-              "xAxis": {
-                "categories": ["2016","2017","2018"]
-              },
-              "yAxis": {
-                "allowDecimals": false,
-                "title": {
-                  "text": "Number of requests"
-                }
-              },
-              "series": [{
-                  "name": "PROD",
-                  "data": [1,2,3]
-              }]
-            }
-          });
-        }
-      });
+          <embed type="text/html" src="https://www.imn.ac.cr/especial/tablas/argentina.html"  width="900" height="500">
                 }
             }).addTo(map);
 	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
