@@ -238,7 +238,7 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
 			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
 		},
 		onEachFeature: function (feature, layer) {
-        layer.bindTooltip("Click en el gráfico para ver la producción historica", {
+        layer.bindTooltip("Click en el gráfico ver la producción historica", {
         sticky: true,
         direction: "top"
       });
