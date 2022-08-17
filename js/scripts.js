@@ -232,6 +232,7 @@ $.getJSON("distritos_influencia.geojson", function(geodata) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
 // Fincas de CoopeVictoria
 $.getJSON("rendimientohistorico.geojson", function(geodata) {
   var layer_geojson_historial = L.geoJson(geodata, {
@@ -307,8 +308,9 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
           layer.openPopup();  
         });
       }
+    }
     }).addTo(map);
-  }
+
   control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
   });
 
