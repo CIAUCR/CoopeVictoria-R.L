@@ -231,84 +231,86 @@ $.getJSON("distritos_influencia.geojson", function(geodata) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 // Fincas de CoopeVictoria
 $.getJSON("rendimientohistorico.geojson", function(geodata) {
-	var layer_geojson_historial = L.geoJson(geodata, {
-		style: function(feature) {
-			return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
-		},
-		onEachFeature: function (feature, layer) {
-        layer.bindTooltip("Click en el gráfico ver la producción historica", {
+  var layer_geojson_historial = L.geoJson(geodata, {
+    style: function(feature) {
+      return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
+    },
+    onEachFeature: function (feature, layer) {
+      layer.bindTooltip("Click en el gráfico ver la producción historica", {
         sticky: true,
         direction: "top"
       });
-
-       layer.on({
+      
+      layer.on({
         click: function (e) {  
           var chartplotoptions ={
-                        chart: {
-                            type: 'area'
-                        },
-                        title: {
-                            text: 'Aquifer Units'
-                        },
-
-                        xAxis: {
-                            allowDecimals: false,
-                            labels: {
-                                formatter: function () {
-                                    return this.value; 
-                                }
-                            }
-                        },
-                        yAxis: {
-                                startOnTick: false,
-                                minPadding: 0.05,
-                            title: {
-                                text: 'Elevation from Sea Level (ft)',
-
-                            },
-                            labels: {
-                                formatter: function () {
-                                    return this.value ;
-                                }
-                            }
-                        },
-                        tooltip: {
-                            pointFormat: '{series.name}{point.y}'
-                        },
-                        plotOptions: {
-
-                                area: {
-                                pointStart: 0,
-                                threshold: 657,
-                                marker: {
-                                    enabled: false,
-                                    symbol: 'circle',
-                                    radius: 2,
-                                    states: {
-                                        hover: {
-                                            enabled: true
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        series: [{
-                            name: 'Surface',
-                            data: [parseFloat(feature.properties.PROD_17),parseFloat(feature.properties.PROD_16)]
-                        }, 
-
-                        ]
-                    };
-                    $('#chartcontainer').highcharts(chartplotoptions);
-                    layer.bindPopup($('#chartcontainer').html());
-                    layer.openPopup();  
-                    });
+            chart: {
+              type: 'area'
+            },
+            title: {
+              text: 'Aquifer Units'
+            },
+            
+            xAxis: {
+              allowDecimals: false,
+              labels: {
+                formatter: function () {
+                  return this.value; 
                 }
-            }).addTo(map);
-	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
-});
+              }
+            },
+            yAxis: {
+              startOnTick: false,
+              minPadding: 0.05,
+              title: {
+                text: 'Elevation from Sea Level (ft)',
+                
+              },
+              labels: {
+                formatter: function () {
+                  return this.value ;
+                }
+              }
+            },
+            tooltip: {
+              pointFormat: '{series.name}{point.y}'
+            },
+            plotOptions: {
+              
+              area: {
+                pointStart: 0,
+                threshold: 657,
+                marker: {
+                  enabled: false,
+                  symbol: 'circle',
+                  radius: 2,
+                  states: {
+                    hover: {
+                      enabled: true
+                    }
+                  }
+                }
+              }
+            },
+            series: [{
+              name: 'Surface',
+              data: [parseFloat(feature.properties.PROD_17),parseFloat(feature.properties.PROD_16)]
+            }, 
+            
+            ]
+          };
+          $('#chartcontainer').highcharts(chartplotoptions);
+          layer.bindPopup($('#chartcontainer').html());
+          layer.openPopup();  
+        });
+      }
+    }).addTo(map);
+  }
+  control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
+  });
 
 
 
