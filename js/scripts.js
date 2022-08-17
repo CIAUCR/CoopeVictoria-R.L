@@ -243,13 +243,73 @@ $.getJSON("rendimientohistorico.geojson", function(geodata) {
         direction: "top"
       });
 
-      layer.on({
+       layer.on({
         click: function (e) {  
-          <embed type="text/html" src="https://www.imn.ac.cr/especial/tablas/argentina.html"  width="900" height="500">
+          var chartplotoptions ={
+                        chart: {
+                            type: 'area'
+                        },
+                        title: {
+                            text: 'Aquifer Units'
+                        },
+
+                        xAxis: {
+                            allowDecimals: false,
+                            labels: {
+                                formatter: function () {
+                                    return this.value; 
+                                }
+                            }
+                        },
+                        yAxis: {
+                                startOnTick: false,
+                                minPadding: 0.05,
+                            title: {
+                                text: 'Elevation from Sea Level (ft)',
+
+                            },
+                            labels: {
+                                formatter: function () {
+                                    return this.value ;
+                                }
+                            }
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}{point.y}'
+                        },
+                        plotOptions: {
+
+                                area: {
+                                pointStart: 0,
+                                threshold: 657,
+                                marker: {
+                                    enabled: false,
+                                    symbol: 'circle',
+                                    radius: 2,
+                                    states: {
+                                        hover: {
+                                            enabled: true
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        series: [{
+                            name: 'Surface',
+                            data: [parseFloat(feature.properties.PROD_17),parseFloat(feature.properties.PROD_16)]
+                        }, 
+
+                        ]
+                    };
+                    $('#chartcontainer').highcharts(chartplotoptions);
+                    layer.bindPopup($('#chartcontainer').html());
+                    layer.openPopup();  
+                    });
                 }
             }).addTo(map);
 	control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
 });
+
 
 
 
