@@ -1,4 +1,4 @@
-//Sistema de monitoreo de cultivo en CoopeVictoria R.L. 
+///Sistema de monitoreo de cultivo en CoopeVictoria R.L. 
 
 // Mapa base
 var map = L.map("mapid");
@@ -49,7 +49,7 @@ var overlayMaps = {
 
 
 // Fincas de CoopeVictoria
-$.getJSON("lotes_coopevictoriarl.geojson", function(geodata) {
+$.getJSON("https://raw.githubusercontent.com/CIAUCR/CoopeVictoria-R.L/1ec2205d310525d9614f3e7758fc6111dea3be08/rendimientohistorico.geojson", function(geodata) {
 	var layer_geojson_lotes_coopevictoriarl = L.geoJson(geodata, {
 		style: function(feature) {
 			return {'color': "red", 'weight': 1, 'fillOpacity': 0.0}
@@ -167,7 +167,7 @@ function estilo_fincas (feature) {
 };
 
 function myFunction() {
-	$.getJSON("lotes_coopevictoriarl.geojson", function(geodata){
+	$.getJSON("https://raw.githubusercontent.com/CIAUCR/CoopeVictoria-R.L/1ec2205d310525d9614f3e7758fc6111dea3be08/lotes_coopevictoriarl.geojson", function(geodata){
 		var layer_geojson_lotes_coopevictoriarl = L.geoJson(geodata, {
 			style: estilo_fincas,
 			onEachFeature: function(feature, layer) {
@@ -210,7 +210,7 @@ function estiloSelect() {
 	
 
 // Distritos de Influencia
-$.getJSON("distritos_influencia.geojson", function(geodata) {
+$.getJSON("https://raw.githubusercontent.com/CIAUCR/CoopeVictoria-R.L/1ec2205d310525d9614f3e7758fc6111dea3be08/distritos_influencia.geojson", function(geodata) {
 	var layer_geojson_distritos_influencia = L.geoJson(geodata, {
 		style: function(feature) {
 			return {'color': "blue", 'weight': 1, 'fillOpacity': 0.0}
@@ -227,106 +227,81 @@ $.getJSON("distritos_influencia.geojson", function(geodata) {
 
 
 
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-// Fincas de CoopeVictoria
-$.getJSON("rendimientohistorico.geojson", function(geodata) {
+$.getJSON("https://raw.githubusercontent.com/CIAUCR/CoopeVictoria-R.L/1ec2205d310525d9614f3e7758fc6111dea3be08/rendimientohistorico.geojson", function(geodata) {
   var layer_geojson_historial = L.geoJson(geodata, {
     style: function(feature) {
       return {'color': "orange", 'weight': 1, 'fillOpacity': 0.0}
     },
     onEachFeature: function (feature, layer) {
-      layer.bindTooltip("Click en el gráfico ver la producción historica", {
+      layer.bindTooltip("Click en la finca para ver la producción historica", {
         sticky: true,
         direction: "top"
       });
-      
       layer.on({
         click: function (e) {  
-          var chartplotoptions ={
-            chart: {
-              type: 'area'
-            },
-            title: {
-              text: 'Aquifer Units'
-            },
-            
-            xAxis: {
-              allowDecimals: false,
-              labels: {
-                formatter: function () {
-                  return this.value; 
+        
+        
+        var xyValues = [
+  {x:2016, y:feature.properties.PROD_16},
+  {x:2017, y:feature.properties.PROD_17},
+  {x:2018, y:feature.properties.PROD_18}
+];
+
+        
+        
+        
+        Highcharts.chart('container', {
+
+    title: {
+        text: 'Evolución de la producción para el lote seleccionado'
+    },
+
+    subtitle: {
+        text: 'Si se coloca sobre el punto podrá ver el valor de producción en Toneladas'
+    },
+
+    xAxis: {
+        categories: ['Año 2016', 'Año 2017', 'Año 2018']
+    },
+
+    plotOptions: {
+        series: {
+            events: {
+                afterAnimate: function () {
+                    this.chart.renderer.label(this.name + ' ha aparecido', 100, 70)
+                        .attr({
+                            padding: 10,
+                            fill: Highcharts.getOptions().colors[0]
+                        })
+                        .css({
+                            color: 'white'
+                        })
+                        .add();
                 }
-              }
-            },
-            yAxis: {
-              startOnTick: false,
-              minPadding: 0.05,
-              title: {
-                text: 'Elevation from Sea Level (ft)',
-                
-              },
-              labels: {
-                formatter: function () {
-                  return this.value ;
-                }
-              }
-            },
-            tooltip: {
-              pointFormat: '{series.name}{point.y}'
-            },
-            plotOptions: {
-              
-              area: {
-                pointStart: 0,
-                threshold: 657,
-                marker: {
-                  enabled: false,
-                  symbol: 'circle',
-                  radius: 2,
-                  states: {
-                    hover: {
-                      enabled: true
-                    }
-                  }
-                }
-              }
-            },
-            series: [{
-              name: 'Surface',
-              data: [parseFloat(feature.properties.PROD_17),parseFloat(feature.properties.PROD_16)]
-            }, 
-            
-            ]
-          };
-          $('#chartcontainer').highcharts(chartplotoptions);
-          layer.bindPopup($('#chartcontainer').html());
-          layer.openPopup();  
+            }
+        }
+    },
+
+    series: [{
+        data: xyValues
+    }]
+});
+       layer.bindPopup(container)
         }
       });
     }
-    }).addTo(map);
-
-  control_layers.addOverlay(layer_geojson_historial, 'Historial  Cosecha por Finca');
-  });
-
-
-
-
-
-
-
-
-
-
+  }).addTo(map);
+  
+  control_layers.addOverlay(layer_geojson_historial, 'Historial de Cosecha por Finca');
+});
 
 
 // Ubicacion del control de capas
 control_layers = L.control.layers(baseMaps, overlayMaps, {position:'topright', "autoZIndex": true, collapsed:true}).addTo(map);	
+
+ 
+
+
 
 
 
